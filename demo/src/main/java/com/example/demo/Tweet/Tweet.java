@@ -3,6 +3,7 @@ package com.example.demo.Tweet;
 import com.example.demo.User.Client;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -16,8 +17,8 @@ public class Tweet {
     @Column
     String tweetMessage;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "userId", nullable = false)
+    @ManyToOne(targetEntity = Client.class)
+    @NotNull
     private Client client;
 
     public Tweet(){}
@@ -25,6 +26,14 @@ public class Tweet {
     public Tweet(String tweetMessage, Client useruserId) {
         this.tweetMessage = tweetMessage;
         this.client = useruserId;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public String getTweetId() {

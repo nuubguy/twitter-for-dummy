@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class FollowController {
 
     @Autowired
-    FollowService followService;
+    private FollowService followService;
 
     @PostMapping("/{username}/{userfollow}")
     public ResponseEntity saveFollow(@PathVariable String username, @PathVariable String userfollow){

@@ -1,7 +1,10 @@
 package com.example.demo.Tweet;
 
+import com.example.demo.User.Client;
 import com.example.demo.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,19 +14,20 @@ import java.util.List;
 public class TweetController {
 
     @Autowired
-    TweetService tweetService;
+    private TweetService tweetService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @GetMapping
     public List<Tweet> fetchSomething(){
         return tweetService.fetchAllTweet();
     }
 
-    @PostMapping
-    public Tweet saveUser(@RequestBody Tweet tweet,String userId){
-        return tweetService.saveTweet(tweet);
+    @PostMapping("/{username}")
+    public ResponseEntity saveTweet(@RequestBody Tweet tweet, @PathVariable String username){
+        return new ResponseEntity(tweetService.saveTweet(tweet,username), HttpStatus.ACCEPTED);
+
     }
 
 

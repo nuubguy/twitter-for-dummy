@@ -9,7 +9,7 @@ import java.util.List;
 public class FollowService {
 
     @Autowired
-    FollowRepository followRepository;
+    private FollowRepository followRepository;
 
     Follower followSomeone(String username, String followUsername){
         Follower follow = new Follower(new CompoundKey(username,followUsername));

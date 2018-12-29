@@ -3,7 +3,6 @@ package com.example.demo.User;
 import com.example.demo.Party.Party;
 import com.example.demo.Tweet.Tweet;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -26,6 +25,10 @@ public class Client {
     @Column
     private LocalDateTime joinDate;
 
+    @Column
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private List<Tweet>tweets = new ArrayList<>(0);
+
 
     @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -33,8 +36,6 @@ public class Client {
             @JoinColumn(name = "userId", nullable = false, updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "partyid", nullable = false, updatable = false) })
     private Set<Party> party = new HashSet<Party>(0);
-
-
 
     public Client(){}
 
@@ -51,6 +52,11 @@ public class Client {
 
     public void setParty(Set<Party> party) {
         this.party = party;
+    }
+
+
+    public void setTweets(List<Tweet> tweets) {
+        this.tweets = tweets;
     }
 
     public String getMessage() {

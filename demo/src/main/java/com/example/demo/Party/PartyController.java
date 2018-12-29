@@ -12,7 +12,7 @@ import java.util.List;
 public class PartyController {
 
     @Autowired
-    PartyService partyService;
+    private PartyService partyService;
 
 
     @GetMapping

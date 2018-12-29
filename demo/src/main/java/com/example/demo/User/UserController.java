@@ -45,6 +45,8 @@ public class UserController {
         return new ResponseEntity(userService.fetchByName2("sakura"),HttpStatus.OK);
     }
 
+
+
     @PostMapping
     public Client saveUser(@RequestBody Client client){
         return userService.saveUser(client);

@@ -12,7 +12,7 @@ import java.util.Set;
 public class PartyService {
 
     @Autowired
-    PartyRepository partyRepository;
+    private PartyRepository partyRepository;
 
     List<Party> fetchAll(){
         return partyRepository.findAll();
